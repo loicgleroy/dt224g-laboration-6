@@ -128,3 +128,24 @@ function displayRecipe(recipe) {
 function displayMessage(text) {
     messageElement.textContent = text;
 }
+// Eventlyssnare
+
+// När sökformuläret skickas:
+// - validera sökfrasen
+// - hämta och visa receptet om sökningen lyckas
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    if (!validateSearchForm()) {
+        return;
+    }
+
+    const searchTerm = searchInput.value.trim();
+
+    // Rensa eventuellt tidigare meddelande och recept inför den nya sökningen
+    displayMessage("");
+    recipeSection.innerHTML = "";
+
+    const recipe = await fetchRecipe(searchTerm);
+    displayRecipe(recipe);
+});
