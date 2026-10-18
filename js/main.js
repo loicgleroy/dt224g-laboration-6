@@ -89,7 +89,8 @@ function displayRecipe(recipe) {
     article.appendChild(title);
     article.appendChild(image);
     article.appendChild(infoDiv);
-// Ingredienslista
+
+    // Ingredienslista
     const ingredientsHeading = document.createElement("h4");
     ingredientsHeading.textContent = "Ingredients";
 
@@ -119,4 +120,11 @@ function displayRecipe(recipe) {
    
     recipeSection.appendChild(article);
 
+}
+/**
+ * Visar ett meddelande (t.ex. "inget recept hittades" eller ett fel) i meddelandesektionen.
+ * @param {string} text
+ */
+function displayMessage(text) {
+    messageElement.textContent = text;
 }
