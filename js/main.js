@@ -146,6 +146,7 @@ form.addEventListener("submit", async function (event) {
     displayMessage("");
     recipeSection.innerHTML = "";
 
+    try {
     const recipe = await fetchRecipe(searchTerm);
     
     if (recipe === null) {
@@ -154,4 +155,9 @@ form.addEventListener("submit", async function (event) {
     }
 
     displayRecipe(recipe);
+    
+    } catch (error) {
+        // fetchRecipe kastade ett fel, t.ex. på grund av nätverksproblem
+        displayMessage("Något gick fel vid hämtningen av receptet. Försök igen senare.");
+    }
 });
