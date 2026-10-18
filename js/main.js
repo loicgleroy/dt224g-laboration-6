@@ -59,3 +59,37 @@ async function fetchRecipe(searchTerm) {
         throw error;
     }
 }
+/**
+ * Skapar och visar ett recept i DOM.
+ * @param {Object} recipe - receptobjekt från API:t
+ */
+function displayRecipe(recipe) {
+    // Rensa ett eventuellt tidigare recept innan det nya skapas
+    recipeSection.innerHTML = "";
+
+    const article = document.createElement("article");
+
+    const title = document.createElement("h3");
+    title.textContent = recipe.name;
+
+    const image = document.createElement("img");
+    image.src = recipe.image;
+    image.alt = recipe.name;
+
+    // Grundläggande info om receptet
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("recipe-info");
+    infoDiv.innerHTML = `
+        <p><strong>Servings:</strong> ${recipe.servings}</p>
+        <p><strong>Prep time:</strong> ${recipe.prepTimeMinutes} minutes</p>
+        <p><strong>Cooking time:</strong> ${recipe.cookTimeMinutes} minutes</p>
+        <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+    `;
+
+    article.appendChild(title);
+    article.appendChild(image);
+    article.appendChild(infoDiv);
+
+    recipeSection.appendChild(article);
+}
+fetchRecipe("pasta").then(recipe => displayRecipe(recipe));
