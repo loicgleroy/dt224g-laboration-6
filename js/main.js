@@ -30,3 +30,32 @@ function validateSearchForm() {
     errorElement.textContent = "";
     return true;
 }
+/**
+ * Hämtar recept från DummyJSON baserat på en sökfras.
+ * @param {string} searchTerm
+ * @returns {Promise<Object|null>} det första receptet, eller null om inget hittades
+ */
+async function fetchRecipe(searchTerm) {
+    try {
+        const response = await fetch(API_URL + encodeURIComponent(searchTerm));
+
+        // Kontrollera att svaret faktiskt var lyckat innan vi använder datan
+        if (!response.ok) {
+            throw new Error(`Serverfel: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // data.recipes är arrayen med recept som API:t returnerar
+        if (data.recipes.length === 0) {
+            return null;
+        }
+
+        return data.recipes[0];
+
+    } catch (error) {
+        // Skriv ut tekniska detaljer i konsolen för felsökning
+        console.error("Fel vid hämtning av recept:", error);
+        throw error;
+    }
+}
