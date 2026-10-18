@@ -89,7 +89,21 @@ function displayRecipe(recipe) {
     article.appendChild(title);
     article.appendChild(image);
     article.appendChild(infoDiv);
+// Ingredienslista
+    const ingredientsHeading = document.createElement("h4");
+    ingredientsHeading.textContent = "Ingredients";
 
+    const ingredientsList = document.createElement("ul");
+    for (let i = 0; i < recipe.ingredients.length; i++) {
+        const listItem = document.createElement("li");
+        listItem.textContent = recipe.ingredients[i];
+        ingredientsList.appendChild(listItem);
+    }
+
+    article.appendChild(ingredientsHeading);
+    article.appendChild(ingredientsList);
+   
     recipeSection.appendChild(article);
+
 }
 fetchRecipe("pasta").then(recipe => displayRecipe(recipe));
