@@ -102,8 +102,21 @@ function displayRecipe(recipe) {
 
     article.appendChild(ingredientsHeading);
     article.appendChild(ingredientsList);
+
+    // Instruktionslista
+    const instructionsHeading = document.createElement("h4");
+    instructionsHeading.textContent = "Instructions";
+
+    const instructionsList = document.createElement("ol");
+    for (let i = 0; i < recipe.instructions.length; i++) {
+        const listItem = document.createElement("li");
+        listItem.textContent = recipe.instructions[i];
+        instructionsList.appendChild(listItem);
+    }
+
+    article.appendChild(instructionsHeading);
+    article.appendChild(instructionsList);
    
     recipeSection.appendChild(article);
 
 }
-fetchRecipe("pasta").then(recipe => displayRecipe(recipe));
