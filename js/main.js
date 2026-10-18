@@ -147,5 +147,11 @@ form.addEventListener("submit", async function (event) {
     recipeSection.innerHTML = "";
 
     const recipe = await fetchRecipe(searchTerm);
+    
+    if (recipe === null) {
+        displayMessage("Inget recept kunde hittas. Prova en annan sökfras.");
+        return;
+    }
+
     displayRecipe(recipe);
 });
